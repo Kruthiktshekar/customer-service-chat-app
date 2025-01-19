@@ -2,9 +2,8 @@ import express from 'express'
 import cors from 'cors'
 import configDb from './config/db.js'
 import  route  from './config/routes.js'
-import configScoket from './config/socket.js'
 import dotenv from 'dotenv'
-
+import configScoket from './config/socket.js'
 
 const app = express()
 const port = 3090

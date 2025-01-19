@@ -39,7 +39,9 @@ const Login = () => {
         console.log(response.data)
         if(response){
             localStorage.setItem('token' , response.data.token)
-            const userData = await axiosApi.get('/user' , {headers : {'Authorization' : localStorage.getItem('token')}})
+            const userData = await axiosApi.get("/user", {
+              headers: { Authorization: localStorage.getItem("token") },
+            })
             if(userData){
               dispatch({type : 'LOGIN' , payload : userData.data})
               if(userData.data.role == 'user'){
@@ -59,7 +61,7 @@ const Login = () => {
     }
     catch(error){
         if(error.status == 401) {
-            toast.error(error.response.data.msg)
+            toast.error(error.response.data.message)
           }
          else {
              toast.error('something went wrong')

@@ -13,13 +13,14 @@ function Users() {
   const [username, setUsername] = useState("");
   const [fullname, setFullname] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("agent");
+  const [role, setRole] = useState("user");
 
   // add user
   const submitHandler = async (e) => {
     e.preventDefault();
     const formData = {
       username,
+      fullname,
       password,
       role,
     };

@@ -1,10 +1,9 @@
 import {Server} from 'socket.io'
-import User from '../app/models/user-model.js';
-import Prompt from '../app/models/prompt-model.js';
-import Chat from '../app/models/chat-model.js';
-
-
-
+import User from '../app/models/userModel.js';
+import Prompt from '../app/models/promptModel.js';
+import Chat from '../app/models/chatModel.js';
+import { CONTROLLERS } from '../app/controllers/helper/constants.js';
+const {SYSTEMID} = CONTROLLERS
 
 const configScoket = () => {
 
@@ -30,7 +29,7 @@ let io = new Server(3131, {
   // Handle user prompt click
   socket.on('prompt-clicked', async (data) => {
     const prompt = await Prompt.findById( data.promptId);
-    const systemId = '66e8eee4ae18b2990ba4a13b'
+    const systemId = SYSTEMID
     if (prompt) {
       const formData = {
         message : {text: prompt.message},

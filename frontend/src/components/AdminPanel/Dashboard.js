@@ -8,6 +8,7 @@ function Admin() {
 
   const { adminState } = useContext(AdminContext);
  
+  console.log(adminState)
 
   return (
     <div>

@@ -22,10 +22,13 @@ function Sidebar() {
           adminDispatch({type : "SET_PROMPTS",payload:promptResponse.data})
         }
         const userResponse = await axiosApi.get('/users' , {headers:{'Authorization' : localStorage.getItem('token')}})
+        console.log(userResponse.data)
         if(userResponse){
           adminDispatch({type : "SET_USERS" , payload : userResponse.data})
         }
         const agentResponse = await axiosApi.get('/agents' , {headers:{'Authorization' : localStorage.getItem('token')}})
+        console.log(agentResponse.data)
+
         if(agentResponse) {
           adminDispatch({type : "SET_AGENTS" , payload : agentResponse.data})
         }

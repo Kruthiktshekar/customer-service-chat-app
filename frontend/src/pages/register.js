@@ -7,6 +7,7 @@ import {toast} from 'react-toastify'
 const Signup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [fullname , setFullname]= useState('')
   const [error, setError] = useState('');
   const clientSideErrors = {}
   
@@ -15,6 +16,8 @@ const Signup = () => {
  const runClientSideValidation = () =>{
     if(username.trim().length === 0){
       clientSideErrors.name = 'username cannot be empty'
+    }else if(username.trim().length === 0){
+      clientSideErrors.fullname = 'fullname cannot be empty'
     }else if(password.trim().length === 0){
       clientSideErrors.password = 'Password cannot be empty'
     }else if(password.length>128 || password.length < 4) {
@@ -26,6 +29,7 @@ const Signup = () => {
     e.preventDefault()
     const formData = {
         username,
+        fullname,
         password
     }
 
@@ -63,6 +67,14 @@ const Signup = () => {
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+         {error.fullname && <p className="error-message">{error.name}</p>}
+        <input
+          type="text"
+          placeholder="Full Name"
+          value={fullname}
+          onChange={(e) => setFullname(e.target.value)}
           required
         />
       {error.password && <p className="error-message">{error.password}</p>}
