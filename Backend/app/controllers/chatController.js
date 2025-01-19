@@ -16,9 +16,15 @@ const {
  * @returns 
  */
 const createChat = async(req,res) => {
+
+
+
+
+
+
     try{
         const chatData = await createController(req,res, CHAT)
-        if(chatData){
+                  if(chatData){
             return res.status(201).json({msg:'message added'})
         }
     }
