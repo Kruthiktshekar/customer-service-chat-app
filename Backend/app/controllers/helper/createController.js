@@ -1,14 +1,14 @@
 import Chat from '../../models/chatModel.js';
 import Prompt from '../../models/promptModel.js';
 import User from '../../models/userModel.js';
-import bcrypt from 'bcryptjs'
-import { USER_ERROR_MESSAGE, CONTROLLERS } from './constants.js'
+import bcrypt from 'bcryptjs';
+import { USER_ERROR_MESSAGE, CONTROLLERS } from './constants.js';
 import { CustomError } from './errorCatch.js';
+import { validationResult } from 'express-validator';
 
 const { INTERNAL_SERVER_ERROR, SOMETHING_WENT_WRONG } = USER_ERROR_MESSAGE;
 
-const { USER, CHAT , PROMPT, SYSTEMID
- } = CONTROLLERS;
+const { USER, CHAT, PROMPT, SYSTEMID } = CONTROLLERS;
 
 /**
  * This function is used to create user || prompt || new chat message and returns successfull response
@@ -21,12 +21,12 @@ export const createController = async (req, res, controllerName) => {
   try {
     switch (controllerName) {
       case USER: {
-        // const errors = validationResult(req);
-        // if (!errors.isEmpty()) {
-        //   return res.status(400).json({ errors: errors.array() });
-        // }
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          throw new CustomError(401, errors.array()[0].msg);
+        }
         const data = req.body;
-        console.log(data)
+        console.log(data);
         const salt = await bcrypt.genSalt();
         const hash = await bcrypt.hash(data.password, salt);
         data.password = hash;
@@ -74,6 +74,7 @@ export const createController = async (req, res, controllerName) => {
       }
     }
   } catch (error) {
+    console.log('[ERROR] in createController', error);
     throw new Error({ statusCode: 500, message: INTERNAL_SERVER_ERROR });
   }
 };

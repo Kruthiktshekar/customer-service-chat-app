@@ -3,10 +3,10 @@ import User from '../../models/userModel.js';
 import { USER_ERROR_MESSAGE, CONTROLLERS } from './constants.js';
 import { CustomError } from './errorCatch.js';
 
-const { INTERNAL_SERVER_ERROR, CHATS_NOT_FOUND,USER_NOT_FOUND} = USER_ERROR_MESSAGE;
+const { INTERNAL_SERVER_ERROR, CHATS_NOT_FOUND, USER_NOT_FOUND } =
+  USER_ERROR_MESSAGE;
 
-const { USER, CHAT
- } = CONTROLLERS;
+const { USER, CHAT } = CONTROLLERS;
 
 /**
  * This function is used to fetch single user || chat message and returns successfull response
@@ -47,10 +47,10 @@ export const getController = async (req, res, controllerName) => {
             message: msg.message.text,
           };
         });
-        if(!projectedMsgs){
-          throw new CustomError(404,  CHATS_NOT_FOUND);
+        if (!projectedMsgs) {
+          throw new CustomError(404, CHATS_NOT_FOUND);
         }
-        return projectedMsgs
+        return projectedMsgs;
       }
     }
   } catch (error) {

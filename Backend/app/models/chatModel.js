@@ -1,11 +1,9 @@
+import mongoose from 'mongoose';
 
+const { Schema, model } = mongoose;
 
-import mongoose from "mongoose";
-
-
-const {Schema , model} = mongoose
-
-const chatSchema = new Schema({
+const chatSchema = new Schema(
+  {
     message: {
       text: {
         type: String,
@@ -15,17 +13,19 @@ const chatSchema = new Schema({
     users: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User' 
-      }
+        ref: 'User',
+      },
     ],
     sender: {
       type: mongoose.Schema.Types.ObjectId,
-      refPath: "User",
+      refPath: 'User',
       required: true,
     },
     isSystem: { type: Boolean, default: false },
-  },{timestamps:true});
+  },
+  { timestamps: true }
+);
 
-const Chat = model('Chat' , chatSchema)
+const Chat = model('Chat', chatSchema);
 
-export default Chat
+export default Chat;

@@ -1,36 +1,39 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const {Schema,model} = mongoose
+const { Schema, model } = mongoose;
 
-const userSchema = new Schema({
+const userSchema = new Schema(
+  {
     username: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
     },
     fullname: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
     },
     password: {
       type: String,
-      required: true
+      required: true,
     },
     role: {
       type: String,
       enum: ['user', 'admin', 'agent', 'system'],
-      default: 'user' 
+      default: 'user',
     },
     isOnline: {
       type: Boolean,
-      default: false 
+      default: false,
     },
     isBusy: {
       type: Boolean,
-      default: false 
-    }
-  }, { timestamps: true })
+      default: false,
+    },
+  },
+  { timestamps: true }
+);
 
-const  User = model('User' , userSchema)
-export default User
+const User = model('User', userSchema);
+export default User;

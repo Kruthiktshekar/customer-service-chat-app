@@ -3,10 +3,10 @@ import User from '../../models/userModel.js';
 import { USER_ERROR_MESSAGE, CONTROLLERS } from './constants.js';
 import { CustomError } from './errorCatch.js';
 
-const { INTERNAL_SERVER_ERROR ,  USER_NOT_FOUND , PROMPTS_NOT_FOUND} = USER_ERROR_MESSAGE;
+const { INTERNAL_SERVER_ERROR, USER_NOT_FOUND, PROMPTS_NOT_FOUND } =
+  USER_ERROR_MESSAGE;
 
-const { USER,PROMPT
- } = CONTROLLERS;
+const { USER, PROMPT, AGENT } = CONTROLLERS;
 
 /**
  * This function is used to update user || prompt || agent and returns successfull response
@@ -36,15 +36,15 @@ export const updateController = async (req, res, controllerName) => {
         await agent.save();
         return agent;
       }
-     case PROMPT : {
-        const id = req.params.id
+      case PROMPT: {
+        const id = req.params.id;
         const data = req.body;
         const prompt = await Prompt.findByIdAndUpdate(id, data, { new: true });
         if (!prompt) {
-          throw new CustomError(404,PROMPTS_NOT_FOUND);
+          throw new CustomError(404, PROMPTS_NOT_FOUND);
         }
         return prompt;
-     }
+      }
     }
   } catch (error) {
     throw new CustomError(

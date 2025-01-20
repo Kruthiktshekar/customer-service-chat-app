@@ -1,12 +1,12 @@
 import Prompt from '../../models/promptModel.js';
 import User from '../../models/userModel.js';
-import { USER_ERROR_MESSAGE, CONTROLLERS } from './constants.js'
+import { USER_ERROR_MESSAGE, CONTROLLERS } from './constants.js';
 import { CustomError } from './errorCatch.js';
 
-const { INTERNAL_SERVER_ERROR,USERS_NOT_FOUND, PROMPTS_NOT_FOUND } = USER_ERROR_MESSAGE;
+const { INTERNAL_SERVER_ERROR, USERS_NOT_FOUND, PROMPTS_NOT_FOUND } =
+  USER_ERROR_MESSAGE;
 
-const { USER, PROMPT, AGENT
- } = CONTROLLERS;
+const { USER, PROMPT, AGENT } = CONTROLLERS;
 
 /**
  * This function is used to fetch all user || prompts || agents and returns successfull response
@@ -30,12 +30,12 @@ export const getAllController = async (req, res, controllerName) => {
         }
         return prompts;
       }
-      case AGENT:{
-        const agents = await User.find({role: 'agent'})
+      case AGENT: {
+        const agents = await User.find({ role: 'agent' });
         if (!agents) {
-            throw new CustomError(404, USERS_NOT_FOUND);
-          }
-          return agents;
+          throw new CustomError(404, USERS_NOT_FOUND);
+        }
+        return agents;
       }
     }
   } catch (error) {

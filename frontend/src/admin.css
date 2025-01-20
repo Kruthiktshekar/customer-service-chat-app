@@ -99,6 +99,8 @@ button {
 
 button.add {
     background-color: #2ecc71;
+    width: 50vh;
+    margin-left: 25rem;
     color: white;
 }
 
