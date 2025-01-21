@@ -5,7 +5,6 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "npx husky init",
     "prepare": "husky",
     "lint": "eslint .",
     "prettier": "npx prettier --write ."
